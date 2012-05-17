@@ -12,6 +12,8 @@
 namespace li3_openid_auth\extensions\adapter\security\auth;
 
 use \lithium\core\Libraries;
+use \LightOpenID;
+//use \lightopenid\LightOpenId;
 
 /**
  * The `Auth` adapter provides basic authentication facilities for checking credentials submitted
@@ -170,9 +172,12 @@ class OpenId extends \lithium\core\Object {
          * @return void
          */
         protected function _init() {
+
                 parent::_init();
 
-                $this->openId = new \lightopenid\LightOpenID($this->_domain);
+                $libs = print_r(Libraries::get(), true);
+
+                $this->openId = new LightOpenID($this->_domain);
         }
 
 
@@ -191,6 +196,7 @@ class OpenId extends \lithium\core\Object {
             $conditions = $this->_filters($credentials->data);
             $options += $this->_config;
 
+            /*
             try {
                 if (!$this->openId->mode) {
                     if(isset($_POST[$this->_field])) {
@@ -201,9 +207,6 @@ class OpenId extends \lithium\core\Object {
                         $this->openId->required = array('contact/email');
                         $this->openId->optional = array('namePerson', 'namePerson/friendly');
                         header('Location: ' . $this->openId->authUrl());
-                        echo '<pre>';
-                        echo $this->openId->authUrl();
-                        echo '</pre>';
                     }
                 } elseif ($this->openId->mode == 'cancel') {
                     return false;
@@ -216,6 +219,7 @@ class OpenId extends \lithium\core\Object {
                 echo $e->getMessage();
                 return false;
             }
+            */
 
             return false;
         }

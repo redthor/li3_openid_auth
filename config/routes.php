@@ -33,7 +33,14 @@ foreach (array_keys($defaultConfig) as $action) {
     $url  = key($defaultConfig[$action]);
     $ctrl = key($defaultConfig[$action][$url]);
     $act  = $defaultConfig[$action][$url][$ctrl];
-    Router::connect($url, $ctrl . '::' . $act);
+    Router::connect(
+        $url,
+        array(
+            'library' => 'li3_openid_auth',
+            'controller' => $ctrl,
+            'action' => $act,
+        )
+    );
 }
 
 //Router::connect('/dprlogin', 'Sessions::add');

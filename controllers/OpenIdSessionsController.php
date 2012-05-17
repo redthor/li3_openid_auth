@@ -8,11 +8,16 @@ use lithium\analysis\Debugger;
 class OpenIdSessionsController extends \lithium\action\Controller {
 
     public function add() {
-        echo Debugger::export($this->request->data);
-        if ($this->request->data && Auth::check('openid', $this->request)) {
-            return $this->redirect('/');
+        $error = false;
+        if ($this->request->data) {
+            if (Auth::check('openid', $this->request)) {
+                return $this->redirect('/');
+            }
+
+            $error = true;
         }
-        // Handle failed authentication attempts
+
+        return compact('error');
     }
 
     /* ... */

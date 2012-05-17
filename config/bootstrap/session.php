@@ -28,7 +28,7 @@ use lithium\security\Auth;
 
 Auth::config(array(
     'openid' => array(
-        'adapter' => 'OpenId'
+        'adapter' => 'OpenId',
     )
 ));
 
